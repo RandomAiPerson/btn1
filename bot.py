@@ -1,10 +1,14 @@
 import discord
-from discord import app_commands
 from discord.ext import commands
 import requests
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Configuration
-BOT_TOKEN = 'MTI1ODkyNTk1OTU2MjY2MTk0OQ.GRZbTr.JqSQ663_1Kfvsb7-QNzwAWMSKIYxnWLhzdfWsE'  # Replace with your Discord bot token
+BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')  # Retrieve bot token from .env file
 
 INTERMEDIARY_SERVER_URL = 'https://nikdahakr.pythonanywhere.com'  # URL of the intermediary server
 
