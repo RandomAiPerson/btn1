@@ -4,7 +4,7 @@ from discord.ext import commands
 import requests
 
 # Configuration
-BOT_TOKEN = 'MTI3MTkxOTA1NDM3ODI0MjA1OQ.GD2bf4.ud-qodfGku5UlUW8Uoe-_swmLNcajY9YY1jobw'  # Replace with your Discord bot token
+BOT_TOKEN = 'MTI1ODkyNTk1OTU2MjY2MTk0OQ.GRZbTr.JqSQ663_1Kfvsb7-QNzwAWMSKIYxnWLhzdfWsE'  # Replace with your Discord bot token
 
 INTERMEDIARY_SERVER_URL = 'https://nikdahakr.pythonanywhere.com'  # URL of the intermediary server
 
