@@ -112,7 +112,5 @@ async def pc_info(interaction: discord.Interaction, session_id: str):
     response = requests.post(f'{INTERMEDIARY_SERVER_URL}/send_command', json={"session_id": session_id, "command": 'pc_info'})
     await interaction.response.send_message(f"PC info command sent to {session_id} successfully. Result will be posted shortly.")
 
-st.header("Running BTN1")
-
 if __name__ == "__main__":
     bot.run(BOT_TOKEN)
